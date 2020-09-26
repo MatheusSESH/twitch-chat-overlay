@@ -6,10 +6,11 @@
   "author": "Matheus Vinicius <matheusvinicius123466@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "dev": "electron ."
   },
   "dependencies": {},
   "devDependencies": {
-    "electron": "^10.1.2"
+    "electron": "^10.1.2",
+    "electron-overlay-window": "^1.0.4"
   }
 }
