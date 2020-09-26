@@ -1,7 +1,7 @@
 {
   "name": "overlay-app",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "src/main.js",
   "repository": "https://github.com/MatheusSESH/First-Electron",
   "author": "Matheus Vinicius <matheusvinicius123466@gmail.com>",
   "license": "MIT",
