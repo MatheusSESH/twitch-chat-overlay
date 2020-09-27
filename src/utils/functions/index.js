@@ -10,6 +10,13 @@ exports.imge = function getImageByDensity (fileName, density, dirPath = './src/a
 
    !file[1] ? file[1] = '.png' : file[1] = '.'+file[1]
 
-   const path = resolve(dirPath, file[0])+'@'+density+'x'+file[1]
+   let path
+
+   if (density === 1) {
+      path = resolve(dirPath, file.join(''))
+   } else {
+      path = resolve(dirPath, file[0])+'@'+density+'x'+file[1]
+   }
+
    return path
 }
