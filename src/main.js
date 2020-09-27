@@ -7,7 +7,7 @@ const { imge } = require('./utils/functions')
 let win = null
 let tray = null
 const isMac = process.platform !== 'darwin'
-const trayIcon = imge('tray-icon', 2)
+const trayIcon = imge('tray-icon', 1)
 
 app.on('ready', () => {
     createOverlay()
@@ -27,8 +27,6 @@ const createOverlay = () => {
         x: 0,
         y: yAxis
     })
-
-    //win.setPosition(0, 200)
 
     win.setIgnoreMouseEvents(true)
 
@@ -64,6 +62,9 @@ const createTray = () => {
         },
 
         { type: 'separator' },
+        { label: 'Reload', click: () => {
+            win.webContents.reload()
+        } },
         { role: 'quit' },
 
 
