@@ -10,7 +10,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "electron": "^10.1.2",
-    "electron-overlay-window": "^1.0.4"
+    "electron": "^10.1.2"
   }
 }

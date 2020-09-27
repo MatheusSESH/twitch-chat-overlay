@@ -1,26 +1,34 @@
-const { app , BrowserWindow , Tray} = require('electron')
-const { overlayWindow } = require('electron-overlay-window')
+const { app, screen, BrowserWindow , Tray, Menu} = require('electron')
 const { format } = require('url')
 const path = require('path')
+const { imge } = require('./utils/functions')
 
 
 let win = null
 let tray = null
 const isMac = process.platform !== 'darwin'
-
+const trayIcon = imge('tray-icon', 2)
 
 app.on('ready', () => {
     createOverlay()
+    createTray()
 })
 
 const createOverlay = () => {
+    const { height } = screen.getPrimaryDisplay().workAreaSize
+
+    const yAxis = (height / 2) - 100
+
     win = new BrowserWindow({ 
-        ...overlayWindow.WINDOW_OPTS,
-        alwaysOnTop: true, 
-        y: 0, 
+        transparent: true,
+        alwaysOnTop: true,
+        skipTaskbar: true,
+        frame: false,
         x: 0,
-        frame: false
+        y: yAxis
     })
+
+    //win.setPosition(0, 200)
 
     win.setIgnoreMouseEvents(true)
 
@@ -35,4 +43,31 @@ const createOverlay = () => {
     })
 
     win.show()
+    
+}
+
+
+const createTray = () => {
+    tray = new Tray(trayIcon)
+
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Twitch Chat Overlay' },
+
+        { 
+            label: 'Position',
+            submenu: [
+                { label: 'Left', click() { win.setPosition(0, (height / 2) - 100) }},
+                { label: 'Right', click() { win.setPosition(width - 320, (height / 2) - 100) }},
+            ]
+        },
+
+        { type: 'separator' },
+        { role: 'quit' },
+
+
+    ])
+
+    tray.setContextMenu(contextMenu)
 }

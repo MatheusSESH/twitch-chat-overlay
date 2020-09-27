@@ -1,6 +1,45 @@
+:root {
+    --colo-twitch-purple: #772ce8;
+    --colo-twitch-red: #e19191;
+    --colo-twitch-cian: #00e6cb;
+    --colo-twitch-amazon: #fad677;
+}
+
+.purple{
+    color: var(--colo-twitch-purple)
+}
+.red{
+    color: var(--colo-twitch-red)
+}
+.cian{
+    color: var(--colo-twitch-cian)
+}
+.amazon{
+    color: var(--colo-twitch-amazon)
+}
+
 * {
-    background: #1d1d1d;
-    font-family: "Cetury Gothic", sans-serif;
     color: #fff;
-    font-size: 16px;
+    font: 20px sans-serif;
+    margin: 0;
+}
+
+#container {
+    padding: 5px;
+    max-width: 320px;
+    background: rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+}
+
+.message img {
+    padding-right: 3px
+}
+
+.message span {
+    font-weight: 600;
 }
