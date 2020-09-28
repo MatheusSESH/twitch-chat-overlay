@@ -2,6 +2,9 @@ const { app, screen, BrowserWindow , Tray, Menu} = require('electron')
 const { format } = require('url')
 const path = require('path')
 const { imge } = require('./utils/functions')
+require('dotenv').config()
+const tmi = require('tmi.js')
+const { decode } = require('punycode')
 
 
 let win = null
@@ -12,6 +15,7 @@ const trayIcon = imge('tray-icon', 1)
 app.on('ready', () => {
     createOverlay()
     createTray()
+    api()
 })
 
 const createOverlay = () => {
@@ -71,4 +75,27 @@ const createTray = () => {
     ])
 
     tray.setContextMenu(contextMenu)
+}
+
+const api = () => {
+    const client = new tmi.Client({
+        options: { debug: true },
+        connection: {
+            reconnect: true,
+            secure: true
+        },
+        identity: {
+            username: process.env.TWITCH_USERNAME,  //
+            password: process.env.TWITCH_AUTH_CLIENT, //
+        },
+        channels: [ process.env.TWITCH_USERNAME ]
+    })
+    
+    client.connect()
+    client.on('message', (channel, tags, message, self) => {
+        if (self) return
+
+            process.env.USER_NAME = self
+            process.env.USER_TEXT = message
+    })
 }
